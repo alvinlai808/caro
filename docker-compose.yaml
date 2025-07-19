@@ -10,13 +10,17 @@ services:
       - .env
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
+
   adminer:
     image: adminer
     ports:
       - 8080:8080
     depends_on:
       - db
+
   web:
-    build: .
+    build: ./app
     ports:
-      - 8888:80
+      - 8888:5000
+    depends_on:
+      - db
