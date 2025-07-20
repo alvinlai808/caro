@@ -19,7 +19,9 @@ services:
       - db
 
   web:
-    build: ./app
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
     ports:
       - 8888:5000
     depends_on:
