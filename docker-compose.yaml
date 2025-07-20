@@ -31,3 +31,9 @@ services:
       - 8888:5000
     depends_on:
       - db
+    
+    # For development, it's convenient to mount your code in on top of copying
+    # the files in your Dockerfile because live updates will not require a
+    # rebuild
+    volumes:
+      - ./app:/app
