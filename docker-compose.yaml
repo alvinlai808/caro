@@ -2,22 +2,25 @@
 services:
 
   db:
-    image: postgres
+    image: postgres:17.5
     container_name: db
     restart: always
     ports:
       - 5432:5432
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: alvin
+      POSTGRES_PASSWORD: "923401926"
+      POSTGRES_DB: caro
+      POSTGRES_HOST: localhost
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
 
-  # adminer:
-  #   image: adminer
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     - db
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
 
   flask:
     container_name: flask
