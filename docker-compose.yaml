@@ -11,7 +11,6 @@ services:
       POSTGRES_USER: alvin
       POSTGRES_PASSWORD: "923401926"
       POSTGRES_DB: caro
-      POSTGRES_HOST: localhost
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
 
