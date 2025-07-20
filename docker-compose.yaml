@@ -3,6 +3,7 @@ services:
 
   db:
     image: postgres
+    container_name: db
     restart: always
     ports:
       - 5432:5432
@@ -11,14 +12,15 @@ services:
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
 
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
-    depends_on:
-      - db
+  # adminer:
+  #   image: adminer
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - db
 
-  web:
+  flask:
+    container_name: flask
     build: 
       context: ./app
       dockerfile: Dockerfile
