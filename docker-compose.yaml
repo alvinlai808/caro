@@ -2,22 +2,24 @@
 services:
 
   db:
-    image: postgres
+    image: postgres:17.5
     container_name: db
     restart: always
     ports:
       - 5432:5432
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: alvin
+      POSTGRES_PASSWORD: "923401926"
+      POSTGRES_DB: caro
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
 
-  # adminer:
-  #   image: adminer
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     - db
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
 
   flask:
     container_name: flask
@@ -28,3 +30,9 @@ services:
       - 8888:5000
     depends_on:
       - db
+    
+    # For development, it's convenient to mount your code in on top of copying
+    # the files in your Dockerfile because live updates will not require a
+    # rebuild
+    volumes:
+      - ./app:/app
